@@ -4,8 +4,8 @@ import Detail from '../views/pages/detail';
 import Favorite from '../views/pages/Favorite';
 
 const routes = {
-    '/search': Search,
   '/': ContentItem,
+  '/search': Search,
   '/restaurant/:id': Detail,
   '/favorites': Favorite, 
 };

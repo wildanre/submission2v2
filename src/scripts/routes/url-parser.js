@@ -14,7 +14,15 @@ const UrlParser = {
             verb: splitedUrl.verb
         };
     },
-    
+
+    parseQuery() {
+        const queryString = window.location.hash.split('?')[1]; // Ambil query string setelah ?
+        if (!queryString) return null;
+
+        const params = new URLSearchParams(queryString);
+        return params.get('q'); // Mengambil parameter 'q' dari URL
+    },
+
     _urlSplitter(url) {
         const urlsSplits = url.split('/');
         return {
