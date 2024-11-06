@@ -1,20 +1,19 @@
 .restaurant-detail {
-    max-width: 800px; // Membatasi lebar konten detail
-    margin: 0 auto; // Centering the container
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
 
     .detail-grid {
         display: grid;
-        grid-template-columns: 1fr 1.5fr; // Gambar di kiri dan detail di kanan
-        gap: 20px; // Jarak antara kolom
+        grid-template-columns: 1fr 1.5fr;
+        gap: 20px;
+        margin-top: 20px;
     }
 
-    .image-container {
-        img {
-            width: 100%; // Gambar responsif
-            border-radius: 10px; // Sudut bulat
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); // Bayangan untuk efek kedalaman
-        }
+    .image-container img {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .info-container {
@@ -24,10 +23,10 @@
         }
 
         ul {
-            padding-left: 20px; // Indentasi untuk daftar
+            padding-left: 20px;
 
             li {
-                margin-bottom: 5px; // Jarak antar item dalam daftar
+                margin-bottom: 5px;
             }
         }
     }
@@ -37,17 +36,19 @@
 
         .menu-grid {
             display: flex;
-            justify-content: space-between; // Memposisikan kolom di sebelah kiri dan kanan
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
         }
 
         .foods,
         .drinks {
-            flex: 1; // Membuat kedua kolom memiliki lebar yang sama
-            margin-right: 20px; // Jarak antar kolom
+            flex: 1;
+            margin-right: 20px;
         }
 
         .drinks {
-            margin-right: 0; // Menghapus margin kanan dari kolom drinks
+            margin-right: 0;
         }
 
         ul {
@@ -55,9 +56,9 @@
             padding: 0;
 
             li {
-                overflow: hidden; // Menghindari overflow saat konten terlalu panjang
-                text-overflow: ellipsis; // Menampilkan titik-titik jika teks terlalu panjang
-                white-space: nowrap; // Mencegah teks melintasi beberapa baris
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
     }
@@ -66,7 +67,7 @@
         margin-top: 20px;
 
         button {
-            background-color: #007bff; // Warna latar tombol
+            background-color: #007bff;
             color: white;
             border: none;
             padding: 14px 16px;
@@ -75,37 +76,39 @@
             border-radius: 5px;
 
             &:hover {
-                background-color: #0056b3; // Warna tombol saat hover
+                background-color: #0056b3;
             }
         }
     }
 
     .reviews-container {
-        max-height: 300px; // Set the maximum height
-        overflow-y: auto; // Enable vertical scrolling
-        background-color: white; // Warna latar belakang putih
-        border: 1px solid #ccc; // Batas luar
-        border-radius: 5px; // Sudut membulat
-        padding: 15px; // Ruang di dalam
-        margin-top: 20px; // Jarak atas untuk bagian review
+        max-height: 300px;
+        overflow-y: auto;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        margin-top: 20px;
 
         &::-webkit-scrollbar {
             width: 5px;
         }
+
         &::-webkit-scrollbar-thumb {
             border-radius: 20px;
-          }
+        }
+
         ul {
             list-style: none;
-            padding: 10;
+            padding: 0;
 
             li {
-                margin-bottom: 15px; // Jarak antar review
-                padding: 10px 0; // Ruang atas dan bawah pada setiap review
-                border-bottom: 1px solid #bfbfbf62; // Garis bawah samar
+                margin-bottom: 15px;
+                padding: 10px 0;
+                border-bottom: 1px solid #bfbfbf62;
 
                 &:last-child {
-                    border-bottom: none; // Menghilangkan garis bawah untuk review terakhir
+                    border-bottom: none;
                 }
             }
         }
@@ -125,25 +128,25 @@
         input,
         textarea {
             width: 100%;
-            padding: 14px; // Ruang di dalam input
+            padding: 14px;
             margin-top: 5px;
-            border: 1px solid #ccc; // Batas input
+            border: 1px solid #ccc;
             border-radius: 5px;
             transition: border-color 0.3s;
 
             &:focus {
-                border-color: #007bff; // Warna batas saat fokus
-                outline: none; // Menghilangkan outline
+                border-color: #007bff;
+                outline: none;
             }
         }
 
         textarea {
-            resize: vertical; // Agar textarea dapat diubah ukuran hanya secara vertikal
-            min-height: 60px; // Tinggi minimal textarea
+            resize: vertical;
+            min-height: 60px;
         }
 
         button[type="submit"] {
-            background-color: #006aff; // Warna latar tombol submit
+            background-color: #006aff;
             margin-top: 10px;
             border-radius: 10px;
             padding: 14px 24px;
@@ -151,13 +154,53 @@
             color: white;
 
             &:hover {
-                background-color: #0040ff; // Warna tombol submit saat hover
+                background-color: #0040ff;
             }
         }
 
         .error-message {
             margin-top: 10px;
-            color: red; // Warna pesan error
+            color: red;
         }
+    }
+}
+
+
+
+// Style untuk perangkat mobile dan tablet
+@media (width <= 700px) {
+    .restaurant-detail .detail-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin: 20px auto 10px;
+    }
+
+    .image-container img {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .info-container {
+        margin-top: 15px;
+        text-align: left;
+    }
+
+    .info-container p,
+    .info-container h3,
+    .info-container ul {
+        margin-bottom: 10px;
+    }
+    .review-buttons button {
+        width: 100%;
+    }
+    .restaurant-detail .menu-container .menu-grid {
+        display: flex;
+        gap: 20px;
+        flex-direction: row;
+    }
+    .reviews-container {
+        max-height: 250px;
     }
 }
