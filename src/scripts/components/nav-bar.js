@@ -9,7 +9,7 @@ class NavBar extends HTMLElement {
         <button class="hamburger">&#9776;</button>
         <ul class="nav-list">
           <li class="nav-item"><a href="/">Home</a></li>
-          <li class="nav-item"><a href="#">Favorite</a></li>
+          <li class="nav-item"><a href="#/favorites">Favorite</a></li>
           <li class="nav-item"><a href="https://github.com/wildanre">About Us</a></li>
         </ul>
       </nav>

@@ -1,5 +1,6 @@
-// src/scripts/views/pages/detail.js
 import { getDetailOfRestaurant, addReview } from '../../data/restaurant-api';
+import LikeButtonInitiator from '../../utils/like-button-initiator';
+import FavoriteRestaurantIdb from '../../data/favorite-restaurant-idb';
 
 const Detail = {
   async render() {
@@ -42,6 +43,9 @@ const Detail = {
             </div>
           </div>
         </div>
+
+        <!-- Tombol Favorit -->
+        <div id="likeButtonContainer"></div>
 
         <div class="review-buttons">
           <button id="showReviewsBtn">Tampilkan Review</button>
@@ -116,13 +120,19 @@ const Detail = {
         const reviewsList = document.querySelector('.reviews');
         reviewsList.innerHTML = updatedReviews.map(
           review => `<li><strong>${review.name}</strong>: ${review.review} <em>(${review.date})</em></li>`
-        ).join('');
+        ).join(''); // Menampilkan review yang baru
 
         reviewForm.reset(); // Reset form setelah review dikirim
       } catch (error) {
         console.error('Failed to add review:', error);
-      } finally {
       }
+    });
+
+    // Inisialisasi tombol favorit
+    const likeButtonContainer = document.getElementById('likeButtonContainer');
+    LikeButtonInitiator.init({
+      likeButtonContainer,
+      restaurant,
     });
   },
 };

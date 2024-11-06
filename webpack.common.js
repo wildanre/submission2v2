@@ -19,8 +19,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
-          'css-loader',
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
         ],
       },
       {
@@ -47,14 +51,21 @@ module.exports = {
         },
       ],
     }),
+    new WorkboxWebpackPlugin.GenerateSW({
+      swDest: './sw.bundle.js',
+      runtimeCaching: [
+        {
+          urlPattern: ({ url }) => url.href.startsWith('https://restaurant-api.dicoding.dev'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'themoviedb-api',
+          },
+        },
+      ],
+    }),
     new FaviconsWebpackPlugin({
       logo: './src/public/images/logo/amba.svg',
       mode: 'webapp',
-    }),
-    new WorkboxPlugin.GenerateSW({
-      swDest: 'sw.bundle.js',
-      clientsClaim: true,
-      skipWaiting: true,
     }),
   ],
 };
