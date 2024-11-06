@@ -69,7 +69,7 @@
             background-color: #007bff; // Warna latar tombol
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 14px 16px;
             cursor: pointer;
             margin-top: 10px;
             border-radius: 5px;
@@ -113,19 +113,19 @@
 
     #reviewFormContainer {
         margin-top: 10px;
-        border: 1px solid #ccc; // Batas luar form
+        border: 1px solid #ccc;
         border-radius: 8px;
-        padding: 15px; // Ruang di dalam form
-        background-color: #ffffff; // Latar belakang form
+        padding: 16px;
+        background-color: #ffffff;
 
         h3 {
-            margin-top: 0; // Menghilangkan margin atas
+            margin-top: 0;
         }
 
         input,
         textarea {
             width: 100%;
-            padding: 10px; // Ruang di dalam input
+            padding: 14px; // Ruang di dalam input
             margin-top: 5px;
             border: 1px solid #ccc; // Batas input
             border-radius: 5px;
@@ -143,11 +143,12 @@
         }
 
         button[type="submit"] {
-            background-color: #008cff; // Warna latar tombol submit
+            background-color: #006aff; // Warna latar tombol submit
             margin-top: 10px;
             border-radius: 10px;
-            padding: 5px 10px;
+            padding: 14px 24px;
             border: none;
+            color: white;
 
             &:hover {
                 background-color: #0040ff; // Warna tombol submit saat hover

@@ -8,26 +8,26 @@ class App {
     constructor({ content }) {
         this._content = content;
         this._initialAppShell();
-        this._initSearch(); // Panggil fungsi untuk inisialisasi pencarian
+        this._initSearch();
     }
 
     _initialAppShell() {
-        // Anda dapat melakukan inisialisasi komponen lain di sini jika diperlukan
+
     }
 
     _initSearch() {
         const searchInput = document.getElementById('searchInput');
 
-        // Menambahkan event listener untuk pencarian real-time
+        // event listener untuk pencarian real-time
         searchInput.addEventListener('keyup', async () => {
             const query = searchInput.value.trim();
             if (query) {
-                console.log('Searching for:', query); // Menambahkan log untuk memeriksa query
-                const results = await searchRestaurants(query);  // Panggil fungsi searchRestaurants
-                console.log('Search results:', results); // Menambahkan log untuk memeriksa hasil pencarian
-                this._displaySearchResults(results);  // Tampilkan hasil pencarian
+                console.log('Searching for:', query);
+                const results = await searchRestaurants(query);
+                console.log('Search results:', results);
+                this._displaySearchResults(results);
             } else {
-                // Jika input kosong, sembunyikan hasil pencarian
+
                 this._hideSearchResults();
             }
         });
@@ -44,30 +44,27 @@ class App {
     toggleSearchResultsVisibility(results) {
         const searchResultsContainer = document.getElementById('searchResults');
 
-        // Jika hasil pencarian tidak ada atau kosong, sembunyikan searchResults
         if (!results || results.founded === 0) {
             searchResultsContainer.style.display = 'none';
         } else {
-            searchResultsContainer.style.display = 'block';  // Tampilkan hasil pencarian
-            searchResultsContainer.style.backgroundColor = '#fff'; // Set background putih untuk hasil pencarian
+            searchResultsContainer.style.display = 'block';
+            searchResultsContainer.style.backgroundColor = 'none';
         }
     }
 
     _displaySearchResults(results) {
         const searchResultsContainer = document.getElementById('searchResults');
-        searchResultsContainer.innerHTML = ''; // Kosongkan hasil sebelumnya
+        searchResultsContainer.innerHTML = '';
 
         if (results.error || results.founded === 0) {
             searchResultsContainer.innerHTML = '<p>No restaurants found.</p>';
             return;
         }
-
-        // Mengontrol visibilitas hasil pencarian
         this.toggleSearchResultsVisibility(results);
 
         results.restaurants.forEach(restaurant => {
             const restaurantElement = document.createElement('div');
-            restaurantElement.classList.add('search_restaurant-card');  // Menambahkan kelas untuk styling
+            restaurantElement.classList.add('search_restaurant-card');
             restaurantElement.innerHTML = `
                 <div class="search_restaurant-card__image">
                     <img src="https://restaurant-api.dicoding.dev/images/small/${restaurant.pictureId}" alt="${restaurant.name}" class="search_restaurant-image">
@@ -76,22 +73,21 @@ class App {
                     <h4 class="search_restaurant-name">${restaurant.name}</h4>
                     <p class="search_restaurant-description">${restaurant.description.slice(0, 100)}...</p> <!-- Membatasi deskripsi -->
                     <div class="search_restaurant-details">
-                        <span class="search_restaurant-rating">Rating: ${restaurant.rating}</span>
-                        <span class="search_restaurant-location">Location: ${restaurant.city}</span>
+                        <span class="search_restaurant-rating"><span class="material-symbols--star"></span> ${restaurant.rating}</span>
+                        <span class="search_restaurant-location">  <span class="search-mdi-location"></span>
+                           ${restaurant.city}</span>
                     </div>
-                    <button class="search_view-details-btn" data-id="${restaurant.id}">View Details</button>
+                    <button class="search_view-details-btn" data-id="${restaurant.id}">Lihat</button>
                 </div>
             `;
             searchResultsContainer.appendChild(restaurantElement);
         });
 
-        // Delegasi event pada container
         searchResultsContainer.addEventListener('click', (event) => {
             if (event.target && event.target.classList.contains('search_view-details-btn')) {
                 const restaurantId = event.target.getAttribute('data-id');
-                window.location.hash = `#/restaurant/${restaurantId}`; // Navigasi ke halaman detail
+                window.location.hash = `#/restaurant/${restaurantId}`;
 
-                // Menyembunyikan hasil pencarian setelah klik "View Details"
                 searchResultsContainer.style.display = 'none';
                 searchInput.value = '';
             }
@@ -105,7 +101,6 @@ class App {
         const heroElement = document.querySelector('.hero-section');
 
         if (heroElement) {
-            // Sembunyikan hero jika di halaman detail, tampilkan di halaman lain
             heroElement.style.display = isDetailPage ? 'none' : 'block';
         }
 
@@ -124,17 +119,17 @@ class App {
                 return;
             }
         } else if (page === Detail) {
-            const { id } = UrlParser.parseActiveUrlWithoutCombiner(); // Mendapatkan ID dari URL
+            const { id } = UrlParser.parseActiveUrlWithoutCombiner();
             restaurantData = await getDetailOfRestaurant(id);
             if (!restaurantData) {
                 this._content.innerHTML = '<h2>Restaurant not found</h2>';
                 return;
             }
-        } else if (page === 'search') { // Menambahkan pengecekan jika halaman adalah pencarian
-            const query = UrlParser.parseQuery(); // Ambil query dari URL (misal ?q=searchTerm)
-            const results = await searchRestaurants(query); // Lakukan pencarian
+        } else if (page === 'search') {
+            const query = UrlParser.parseQuery();
+            const results = await searchRestaurants(query);
             this._displaySearchResults(results);
-            return; // Pastikan hasil pencarian hanya ditampilkan untuk halaman pencarian
+            return;
         }
 
         this._content.innerHTML = await page.render(restaurantData);
@@ -143,10 +138,9 @@ class App {
 }
 
 const app = new App({
-    content: document.querySelector('#mainContent'), // Pastikan ini mengarah ke elemen yang ada
+    content: document.querySelector('#mainContent'),
 });
 
-// Event listener untuk merender halaman ketika URL hash berubah atau halaman dimuat
 window.addEventListener('hashchange', () => {
     app.renderPage();
 });
